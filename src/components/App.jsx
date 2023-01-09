@@ -3,6 +3,7 @@ import { Contacts } from "./contacts/Contacts";
 import Form from 'components/form/form'
 
 const shortid = require('shortid');
+const contactId = shortid.generate();
  
 export class App extends Component {
   state = {
@@ -13,13 +14,16 @@ export class App extends Component {
   }
   
   handelFormSbmit = data => {
-    console.log(data)
-  //   const contact = data.map(date => date.id = shortid.generate())
-  //   console.log(contact)
+    const contact = {
+      id: contactId,
+      name: data.name,
+      number: data.number,
+    };
 
-  //      this.setState(prevState => (console.log({contacts:[ ...prevState.contacts, data ]})) )
-  //  console.log(this.state)
-  }
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
+   }
  
   deleteContact = id => {
     this.setState(prevState => ({ contacts: prevState.contacts.filter(contact => contact.id !== id) }))
@@ -39,7 +43,7 @@ export class App extends Component {
         fontSize: 40,
         color: '#010101'
       }} >
-        <Form onSubmit={contacts} />
+        <Form onSubmit={this.handelFormSbmit} />
         <Contacts contactsList={contacts} onDeleteContact={this.deleteContact} />
         
 </div>
