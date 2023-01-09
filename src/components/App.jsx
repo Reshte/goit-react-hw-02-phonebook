@@ -4,8 +4,7 @@ import Form from 'components/form/form'
 import { Filter } from "./filter/Filter";
 
 const shortid = require('shortid');
-const contactId = shortid.generate();
- 
+
 export class App extends Component {
   state = {
   contacts: [ {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -15,26 +14,14 @@ export class App extends Component {
     filter: '',
     }
   
-  handelFormSbmit = data => {
-    
-   const isNameInContact = this.state.contacts.find(contact=> contact.name === data.name.toLowerCase().trim())
-   if(isNameInContact){
-    alert(`${contact.name}`)
+  handelFormSbmit = ({ name, number }) => {
+    const isNameInContacts = this.state.contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase().trim())
+     if(isNameInContacts){
+    alert(`${name} is already in contacts`)
+   } else {this.setState(prevState => ({
+     contacts: [...prevState.contacts, { id: shortid.generate(), name, number } ],
+    }))}
    }
-
-    const contact = {
-      id: contactId,
-      name: data.name,
-      number: data.number,
-    };
-
-
-
-  this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
-      
-    }
  
   filterContact = (e) => {
         this.setState({filter: e.currentTarget.value})
@@ -48,6 +35,7 @@ export class App extends Component {
     const { contacts, filter } = this.state
     const filterNormalise = filter.toLowerCase().trim()
     const filterElemens = contacts.filter(contact => contact.name.toLowerCase().includes(filterNormalise))
+   
       
     return (
         <div
@@ -57,7 +45,7 @@ export class App extends Component {
           flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 20,
+        fontSize: 10,
         color: '#010101'
       }} >
         <Form onSubmit={this.handelFormSbmit} />
