@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ContactList } from "./ContactList/ContactList";
 import ContactForm from 'components/ContactForm/ContactForm'
 import { Filter } from "components/Filter/Filter";
-import {Wrapper, Title, TitleContacts} from './App.styled'
+import { Wrapper, Title, TitleContacts } from './App.styled'
 import PropTypes from 'prop-types';
 
 
