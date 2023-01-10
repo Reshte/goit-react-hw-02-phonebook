@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import {ContactListItem} from './ContactListItem/ContactListItem'
-import { List, Item } from './ContactList.styled'
+import { List } from './ContactList.styled'
 
 
 export const ContactList = ({ contactsList, onDeleteContact }) => {
@@ -11,7 +11,7 @@ export const ContactList = ({ contactsList, onDeleteContact }) => {
         </List> )
 }
 
-ContactList.proptypes ={
+ContactList.proptype ={
     contactsList:PropTypes.array,
     onDeleteContact:PropTypes.func,
 }

@@ -2,6 +2,6 @@ import styled from '@emotion/styled'
 
 
 export const List = styled.ul`
-display:flex;`
-export const Item = styled.li`
-display:flex;`
+display:flex;
+flex-direction:column;`
+
