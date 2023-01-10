@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ContactList } from "./ContactList/ContactList";
 import ContactForm from 'components/ContactForm/ContactForm'
+import { Filter } from "./Filter/Filter";
 // import { Filter } from "components/Filter/Filter";
 import { Wrapper, Title, TitleContacts } from './App.styled'
 import PropTypes from 'prop-types';
@@ -44,7 +45,7 @@ export class App extends Component {
         <Title>Phonebook</Title>
         <ContactForm onSubmit={this.handelFormSbmit} />
         <TitleContacts>Contacts</TitleContacts>      
-        {/* <Filter value={filter} onChange={this.filterContact } /> */}
+        <Filter value={filter} onChange={this.filterContact } />
         <ContactList contactsList={filterElemens} onDeleteContact={this.deleteContact} />
         </Wrapper>
   )    
