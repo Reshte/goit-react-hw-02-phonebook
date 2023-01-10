@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Contacts } from "./contacts/Contacts";
-import Form from 'components/form/form'
-import { Filter } from "./filter/Filter";
+import { ContactList } from "./ContactList/ContactList";
+import ContactForm from 'components/ContactForm/ContactForm'
+import { Filter } from "./Filter/Filter";
+import PropTypes from 'prop-types';
+import {Wrapper, Title, TitleContacts} from './App.styled'
 
 const shortid = require('shortid');
 
@@ -35,27 +37,29 @@ export class App extends Component {
     const { contacts, filter } = this.state
     const filterNormalise = filter.toLowerCase().trim()
     const filterElemens = contacts.filter(contact => contact.name.toLowerCase().includes(filterNormalise))
-   
-      
+         
     return (
-        <div
-      style={{
-        height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 10,
-        color: '#010101'
-      }} >
-        <Form onSubmit={this.handelFormSbmit} />
+        <Wrapper>
+        <Title>Phonebook</Title>
+        <ContactForm onSubmit={this.handelFormSbmit} />
+        <TitleContacts>Contacts</TitleContacts>      
         <Filter value={filter} onChange={this.filterContact } />
-        <Contacts contactsList={filterElemens} onDeleteContact={this.deleteContact} />
-        
-</div>
+        <ContactList contactsList={filterElemens} onDeleteContact={this.deleteContact} />
+        </Wrapper>
   )    
   }
 }
 
-
-
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ),
+  filter: PropTypes.string,
+  handelFormSbmit: PropTypes.func,
+  deleteContact: PropTypes.func,
+  filterContact: PropTypes.func,
+};
