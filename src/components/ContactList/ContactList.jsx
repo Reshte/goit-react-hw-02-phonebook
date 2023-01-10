@@ -4,10 +4,11 @@ import { List } from './ContactList.styled'
 
 
 export const ContactList = ({ contactsList, onDeleteContact }) => {
+    console.log(contactsList[0].id)
         return ( 
-        <List>
-        {contactsList.map(({ id, name, number }) => (
-        <ContactListItem key={id} name ={name} number={number} onDeleteContact={onDeleteContact}/>))}
+            <List>
+                   {contactsList.map(({ id, name, number }) => (
+                       <ContactListItem key={id} id={id} name={name} number={number} onDeleteContact={onDeleteContact}/>))}
         </List> )
 }
 
